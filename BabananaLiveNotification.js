@@ -48,11 +48,10 @@ lls.start();
 
 
 http.createServer(function (request, response) {
-   console.log('request starting for ');
+   dw.post_test('Webhook測試');
 }).listen(process.env.PORT || 5000)
 
-console.log('Server running at http://127.0.0.1:'+ process.env.PORT +'/');
+console.log('Server running at https://banana-live-notification.herokuapp.com:'+ process.env.PORT);
 
-//測試discord webhook是否正常運作
-dw.post_test('[開始執行]');
+
 
