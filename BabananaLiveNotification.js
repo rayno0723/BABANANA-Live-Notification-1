@@ -48,13 +48,16 @@ lls.start();
 
 
 http.createServer(function (request, response) {
-   response.writeHead(200,{'Content-Type':'text/html'});
-   dw.post_test('Webhook測試');
-   response.write('<html><body>已發送測試</body></html>');
-   response.end();
+   if(request.url == '/'){
+       response.writeHead(200,{'Content-Type':'text/html'});
+       dw.post_test('Webhook測試');
+       response.write('<html><body>已發送測試</body></html>');
+       response.end();
+    
+   }
 }).listen(process.env.PORT || 5000)
 
-console.log('Server running at https://banana-live-notification.herokuapp.com:'+ process.env.PORT);
+console.log('Server running at https://banana-live-notification.herokuapp.com');
 
 
 
