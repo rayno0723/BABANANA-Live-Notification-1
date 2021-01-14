@@ -48,12 +48,15 @@ lls.start();
 
 
 http.createServer(function (request, response) {
-   if(request.url == '/'){
+   if(request.url == '/test'){
        response.writeHead(200,{'Content-Type':'text/html'});
        dw.post_test('Webhook測試');
        response.write('<html><body>已發送測試</body></html>');
        response.end();
-    
+   }else{
+       response.writeHead(200,{'Content-Type':'text/html'});
+       response.write('<html><body>已重新喚醒</body></html>');
+       response.end();
    }
 }).listen(process.env.PORT || 5000)
 
