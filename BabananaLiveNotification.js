@@ -53,7 +53,7 @@ http.createServer(function (request, response) {
        dw.post_test('Webhook測試');
        response.write('<html><body>已發送測試</body></html>');
        response.end();
-   }else{
+   }else if(request.url == '/'){
        response.writeHead(200,{'Content-Type':'text/html'});
        console.log('已重新喚醒');
        response.write('<html><body>已重新喚醒</body></html>');
