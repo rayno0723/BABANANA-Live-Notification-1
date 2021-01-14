@@ -55,6 +55,7 @@ http.createServer(function (request, response) {
        response.end();
    }else{
        response.writeHead(200,{'Content-Type':'text/html'});
+       console.log('已重新喚醒');
        response.write('<html><body>已重新喚醒</body></html>');
        response.end();
    }
