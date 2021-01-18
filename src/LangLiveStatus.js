@@ -73,7 +73,7 @@ class LangLiveStatus extends EventEmitter {
             this._getLangPlayLiveRoomInfo();
 
             this._OnlineCheck();
-        },60000);
+        },5000);
     }
 
     start(){

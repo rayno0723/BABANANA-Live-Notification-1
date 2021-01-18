@@ -61,7 +61,7 @@ http.createServer(function (request, response) {
    }
 }).listen(process.env.PORT || 5000)
 
-console.log('Server running at https://banana-live-notification.herokuapp.com');
+console.log('Server running');
 
 
 

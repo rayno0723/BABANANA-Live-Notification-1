@@ -4,8 +4,6 @@ class NotificationCore {
         // this.lastPostTime = '';
 
         this.loopCount = 0;
-        this.lastOnlineStatus = 'unknown';
-        this.thisTimeOnlineStatus = 'unknown';
 
         this.msgQueue = [];
         this.statusQueue = [];
@@ -30,18 +28,13 @@ class NotificationCore {
     }
     
     _addStatusQueue(status){
-        this.thisTimeOnlineStatus = status
-        
-        if(status !== this.statusQueue[this.statusQueue.length-1] || this.statusQueue.length <= 0){
-            //
-            this.statusQueue.push(status);
-        }
+        this.statusQueue.push(status);
 
-        if(this.statusQueue.length > 1){
+        if(this.statusQueue.length > 2){
             this.statusQueue.shift();
         }
 
-        console.log(this.statusQueue);
+        //console.log(this.statusQueue[this.statusQueue.length-1]);     
     }
 
     sendOnlineMsg(){
@@ -54,32 +47,36 @@ class NotificationCore {
 
     _autoPost(){
         setTimeout(async () => {
-            if(this.statusQueue.length > 0){
+            if(this.statusQueue.length > 1){
                 try {
-                    if(this._isFirstTimePost(this.statusQueue)){
-                        await this._post(this.statusMsg[this.statusQueue[0]]);
-
-                        this.lastOnlineStatus = this.statusQueue[0];
-                        
-                        this.statusQueue.shift();
+                    if(this._needToPost(this.statusQueue)){
+                        await this._post(this.statusMsg[this.statusQueue[this.statusQueue.length-1]]);
                     }
                 } catch (error) {
                     console.log(error);
                 }
             }
-
-            //this.lastOnlineStatus = this.thisTimeOnlineStatus;
+            //test
+            //if(this.statusQueue.length > 2){
+            //    console.log('[Error]Queue is large than 2');
+            //}else{
+            //    console.log('[QueueLength]:' + this.statusQueue.length);
+            //}
             this.loopCount++;
 
             this._autoPost();
-        }, 5000);
+        }, 1000);
     }
 
     _post(msg){} /* extends 這個 class 然後 override 這個 function */
 
-    _isFirstTimePost(statusQueue){
-        if(statusQueue.length > 0 && statusQueue[0] !== 'unknown' && statusQueue[0] !== this.lastOnlineStatus){
-            return true;
+    _needToPost(statusQueue){
+        if(statusQueue[0] !== 'unknown'){
+            if(statusQueue[this.statusQueue.length-2] === 'offline' && statusQueue[this.statusQueue.length-1] === 'online'){
+                return true;
+            }else{
+                return false;
+            } 
         }else{
             return false;
         }
