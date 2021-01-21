@@ -51,6 +51,7 @@ class NotificationCore {
                 try {
                     if(this._needToPost(this.statusQueue)){
                         await this._post(this.statusMsg[this.statusQueue[this.statusQueue.length-1]]);
+                        this.statusQueue.shift();
                     }
                 } catch (error) {
                     console.log(error);
