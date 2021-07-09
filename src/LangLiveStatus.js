@@ -8,12 +8,12 @@ class LangLiveStatus extends EventEmitter {
         
         this.chat_room_id = chat_room_id;
 
-        this.lang_api = `https://api.kingkongapp.com/webapi/v1/room/info?room_id=${this.chat_room_id}`;
+        this.lang_api = `https://game-api.lang.live/webapi/v1/room/info?room_id=${this.chat_room_id}`;
         this.lang_user_page = `https://play.lang.live/${this.chat_room_id}`;
 
         this.http_options = {
             method: 'GET',
-            host: 'api.kingkongapp.com',
+            host: 'api.game-api.lang.live',
             headers: {
                 referer: this.lang_user_page
             }
